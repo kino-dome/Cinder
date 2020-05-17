@@ -50,6 +50,10 @@
 	namespace cinder {
 		class CaptureImplJni;
 	}	
+#elif defined( CINDER_LINUX )
+	namespace cinder {
+		class CaptureImplV4l2;
+	}	
 #endif
 
 #include <map>
@@ -148,6 +152,8 @@ class CI_API Capture {
 	CaptureImplDirectShow			*mImpl;
 #elif defined( CINDER_ANDROID )
 	CaptureImplJni					*mImpl;		
+#elif defined( CINDER_LINUX )
+	CaptureImplV4l2					*mImpl;				
 #endif
 };
 

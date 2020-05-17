@@ -28,6 +28,12 @@ list( APPEND SRC_SET_CINDER_APP_LINUX
 	${CINDER_SRC_DIR}/cinder/app/linux/PlatformLinux.cpp
 )
 
+# sources needed for v4l2 capture
+list ( APPEND SRC_SET_CINDER_V4L2
+	${CINDER_SRC_DIR}/cinder/Capture.cpp
+	${CINDER_SRC_DIR}/cinder/CaptureImplV4l2.cpp
+)
+
 if( NOT CINDER_DISABLE_AUDIO )
 	list( APPEND SRC_SET_CINDER_AUDIO_LINUX
 	#	${CINDER_SRC_DIR}/cinder/audio/linux/ContextJack.cpp
@@ -92,7 +98,12 @@ list( APPEND CINDER_SRC_FILES
 	${SRC_SET_CINDER_AUDIO_LINUX}
 	${SRC_SET_CINDER_AUDIO_DSP}
 	${SRC_SET_CINDER_VIDEO_LINUX}
+	${SRC_SET_CINDER_V4L2}
 )
+
+#libjpeg 
+find_package(JPEG REQUIRED)
+list( APPEND CINDER_LIBS_DEPENDS ${JPEG_LIBRARIES} )
 
 # Relevant libs and include dirs depending on target platform and target GL.
 if( CINDER_GL_CORE )
